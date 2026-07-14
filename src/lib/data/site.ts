@@ -7,7 +7,7 @@ export const siteConfig = {
   title: "Jeevun Sandhu — Builder & Entrepreneur",
   role: "Student, Builder & AI-Native Entrepreneur",
   location: "Los Angeles, CA",
-  url: "https://jeevunsandhu.com", // PLACEHOLDER: set to real production domain
+  url: "https://jeevun-sandhu-website.vercel.app", // PLACEHOLDER: swap for a custom domain when purchased
   email: "jeesand15@gmail.com",
   description:
     "15-year-old builder based in Los Angeles shipping real products with AI-assisted engineering — currently working toward his first paying customer.",
