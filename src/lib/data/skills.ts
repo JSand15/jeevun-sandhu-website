@@ -27,6 +27,15 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
+    category: "Finance & Data",
+    items: [
+      "Financial modeling",
+      "Data analysis",
+      "Machine learning",
+      "Quantitative research",
+    ],
+  },
+  {
     category: "Business",
     items: [
       "Customer discovery",
@@ -39,8 +48,8 @@ export const skillGroups: SkillGroup[] = [
 
 export const achievements = [
   {
-    label: "2 products shipped to production",
-    detail: "QuitFVR and an AI-powered real estate platform, both live.",
+    label: "3 finance & AI projects in motion",
+    detail: "Finance OS, FinLearn Analytics, and Numerai tournament models.",
   },
   {
     label: "7-project portfolio",

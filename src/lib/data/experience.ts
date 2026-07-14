@@ -10,39 +10,38 @@ export interface TimelineEntry {
 // PLACEHOLDER: dates are approximate — verify and refine before publishing.
 export const timeline: TimelineEntry[] = [
   {
-    id: "palisades-charter",
-    date: "2023 — Present",
-    title: "Student",
+    id: "middle-school",
+    date: "2022",
+    title: "Started middle school",
+    org: "Middle School", // PLACEHOLDER: name the actual school
+    description: "Where it all started — before any of the building began.",
+    type: "education",
+  },
+  {
+    id: "locked-in",
+    date: "2024 — 2025",
+    title: "Locked in",
+    org: "Los Angeles",
+    description:
+      "After the LA fires hit close to home, something shifted. I stopped treating building as a side hobby and started treating it like a real commitment.",
+    type: "milestone",
+  },
+  {
+    id: "high-school",
+    date: "2025 — Present",
+    title: "Started high school",
     org: "Palisades Charter High School",
     description:
       "Balancing a full course load with building products outside of class hours — school takes most weekday time, so execution has to be efficient.",
     type: "education",
   },
   {
-    id: "first-build",
-    date: "2025",
-    title: "Started building software products",
-    org: "Independent",
-    description:
-      "Began directing AI-assisted engineering tools to build real, working software as a non-technical founder — starting with small utilities and PWAs.",
-    type: "milestone",
-  },
-  {
-    id: "quitfvr-launch",
-    date: "2025",
-    title: "Shipped QuitFVR",
-    org: "Independent",
-    description:
-      "Designed and shipped a progressive web app to help people quit vaping — first fully deployed product.",
-    type: "project",
-  },
-  {
-    id: "ai-real-estate-launch",
+    id: "finance-ai-projects",
     date: "2025 — 2026",
-    title: "Shipped AI Real Estate Platform",
+    title: "Started building finance & AI projects",
     org: "Independent",
     description:
-      "Built a property management platform for landlords with AI-assisted workflows layered on top of core operations.",
+      "Began directing AI-assisted engineering to build Finance OS, FinLearn Analytics, and machine learning models for the Numerai tournament.",
     type: "project",
   },
   {

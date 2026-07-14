@@ -24,7 +24,7 @@ const sections = [
   {
     title: "Why AI, specifically",
     body: [
-      "I got interested in AI because it collapsed the gap between having an idea and having a working product. A few years ago, a 15-year-old with no funding and no engineering team couldn't ship two production web apps. Now I can — and that changes what's possible for anyone willing to put in the work to direct it well.",
+      "I got interested in AI because it collapsed the gap between having an idea and having a working product. A few years ago, a 15-year-old with no funding and no engineering team couldn't build real finance and data products alone. Now I can — and that changes what's possible for anyone willing to put in the work to direct it well.",
       "I try to treat AI as the last 10% of a product, not the first. The core has to work — the workflow, the UX, the value — before any AI feature gets bolted on.",
     ],
   },

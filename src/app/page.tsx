@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FadeIn } from "@/components/motion/fade-in";
 import { StaggerGroup, StaggerItem } from "@/components/motion/stagger";
 import { GithubIcon, LinkedinIcon } from "@/components/icons";
+import { AvatarGlow } from "@/components/site/avatar-glow";
 import { ProjectCard } from "@/components/site/project-card";
 import { Timeline } from "@/components/site/timeline";
 import { Badge } from "@/components/ui/badge";
@@ -29,7 +30,10 @@ export default function HomePage() {
         className="container-wide pt-20 pb-20 sm:pt-32 sm:pb-28"
       >
         <FadeIn>
-          <Badge variant="secondary" className="mb-6 font-normal">
+          <AvatarGlow />
+        </FadeIn>
+        <FadeIn delay={0.03}>
+          <Badge variant="secondary" className="mt-8 mb-6 font-normal">
             {siteConfig.location} · {siteConfig.role}
           </Badge>
         </FadeIn>
@@ -131,7 +135,7 @@ export default function HomePage() {
                 Featured work
               </p>
               <h2 className="text-foreground mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-                Things I&apos;ve shipped
+                What I&apos;m building
               </h2>
             </div>
             <Link
