@@ -22,19 +22,19 @@ const contactLinks = [
   },
   {
     label: "GitHub",
-    value: "@jeevunsandhu",
+    value: `@${siteConfig.social.githubHandle}`,
     href: siteConfig.social.github,
     icon: GithubIcon,
   },
   {
     label: "LinkedIn",
-    value: "Jeevun Sandhu",
+    value: siteConfig.social.linkedinName,
     href: siteConfig.social.linkedin,
     icon: LinkedinIcon,
   },
   {
     label: "X (Twitter)",
-    value: "@jeevunsandhu",
+    value: siteConfig.social.twitterHandle,
     href: siteConfig.social.twitter,
     icon: XIcon,
   },

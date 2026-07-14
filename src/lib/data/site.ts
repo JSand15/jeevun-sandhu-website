@@ -31,9 +31,12 @@ export const siteConfig = {
     },
   ],
   social: {
-    github: "https://github.com/jeevunsandhu", // PLACEHOLDER: verify handle
-    linkedin: "https://linkedin.com/in/jeevunsandhu", // PLACEHOLDER: verify handle
-    twitter: "https://x.com/jeevunsandhu", // PLACEHOLDER: verify handle
+    github: "https://github.com/JSand15",
+    githubHandle: "JSand15",
+    linkedin: "https://www.linkedin.com/in/jeevunsandhu/",
+    linkedinName: "Jeevun Sandhu",
+    twitter: "https://x.com/JeevSand",
+    twitterHandle: "@JeevSand",
     email: "mailto:jeesand15@gmail.com",
   },
 } as const;
