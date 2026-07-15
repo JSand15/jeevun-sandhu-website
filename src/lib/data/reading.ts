@@ -12,7 +12,7 @@ export const books: Book[] = [
     author: "Peter Thiel",
     status: "favorite",
     takeaway:
-      "Competition is overrated — the goal is to build something valuable enough that competition stops mattering.",
+      "Competition is overrated. The goal is to build something so valuable that competition stops mattering.",
   },
   {
     title: "The Lean Startup",
@@ -26,7 +26,7 @@ export const books: Book[] = [
     author: "Phil Knight",
     status: "read",
     takeaway:
-      "Founders rarely feel as certain in the moment as they look in hindsight.",
+      "Founders rarely feel as sure in the moment as they look looking back on it.",
   },
   {
     title: "The Almanack of Naval Ravikant",
@@ -36,4 +36,4 @@ export const books: Book[] = [
 ];
 
 export const readingNote =
-  "I read mostly founder stories and business fundamentals right now — trying to build the judgment that doesn't come from a classroom.";
+  "Right now I mostly read founder stories and business basics. Trying to build the kind of judgment you can't get from a classroom.";

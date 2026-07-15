@@ -7,19 +7,19 @@ export interface TimelineEntry {
   type: "education" | "project" | "milestone";
 }
 
-// PLACEHOLDER: dates are approximate — verify and refine before publishing.
+// PLACEHOLDER: dates are approximate, verify and refine before publishing.
 export const timeline: TimelineEntry[] = [
   {
     id: "middle-school",
     date: "2022",
     title: "Started middle school",
     org: "Middle School", // PLACEHOLDER: name the actual school
-    description: "Where it all started — before any of the building began.",
+    description: "Where it all started. Before any of the building began.",
     type: "education",
   },
   {
     id: "locked-in",
-    date: "2024 — 2025",
+    date: "2024-2025",
     title: "Locked in",
     org: "Los Angeles",
     description:
@@ -28,20 +28,20 @@ export const timeline: TimelineEntry[] = [
   },
   {
     id: "high-school",
-    date: "2025 — Present",
+    date: "2025-Present",
     title: "Started high school",
     org: "Palisades Charter High School",
     description:
-      "Balancing a full course load with building products outside of class hours — school takes most weekday time, so execution has to be efficient.",
+      "Balancing a full course load with building products outside of class hours. School eats most of my weekday time, so I have to be efficient with what's left.",
     type: "education",
   },
   {
     id: "finance-ai-projects",
-    date: "2025 — 2026",
+    date: "2025-2026",
     title: "Started building finance & AI projects",
     org: "Independent",
     description:
-      "Began directing AI-assisted engineering to build Finance OS, FinLearn Analytics, and machine learning models for the Numerai tournament.",
+      "Started directing AI-assisted engineering to build Finance OS, FinLearn Analytics, and machine learning models for the Numerai tournament.",
     type: "project",
   },
   {
@@ -50,7 +50,7 @@ export const timeline: TimelineEntry[] = [
     title: "Building a multi-agent AI crew",
     org: "AIS-OS",
     description:
-      "Assembling a system of specialized AI agents to operate more like a small studio than a solo founder — covering research, copy, dev, and ops.",
+      "Putting together a crew of specialized AI agents so I can run more like a small studio than one kid doing everything myself. Covers research, copy, dev, and ops.",
     type: "project",
   },
   {
@@ -59,7 +59,7 @@ export const timeline: TimelineEntry[] = [
     title: "First paying customer",
     org: "Independent",
     description:
-      "Currently focused on turning one of these products into a real, paying business — bootstrapped, no outside funding.",
+      "Right now I'm focused on turning one of these products into a real, paying business. Bootstrapped, no outside funding.",
     type: "milestone",
   },
 ];

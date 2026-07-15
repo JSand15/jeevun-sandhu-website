@@ -29,7 +29,7 @@ export async function GET() {
   const rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>${escapeXml(siteConfig.name)} — Blog</title>
+    <title>${escapeXml(siteConfig.name)} | Blog</title>
     <link>${siteConfig.url}/blog</link>
     <description>${escapeXml(siteConfig.description)}</description>
     <language>en-us</language>${items}

@@ -9,7 +9,7 @@ import { siteConfig } from "@/lib/data/site";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with Jeevun Sandhu — email, GitHub, LinkedIn, and X.",
+    "Get in touch with me. Email, GitHub, LinkedIn, or X.",
   alternates: { canonical: "/contact" },
 };
 
@@ -46,7 +46,7 @@ export default function ContactPage() {
       <PageHeader
         eyebrow="Contact"
         title="Let's talk"
-        description="Open to collaborations, internships, and conversations with founders, engineers, and investors."
+        description="I'm open to collaborations, internships, or just chatting with founders, engineers, and investors."
       />
 
       <div className="container-wide grid gap-16 pb-24 lg:grid-cols-2">

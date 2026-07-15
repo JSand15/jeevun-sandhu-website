@@ -21,7 +21,7 @@ export function ContactForm() {
     event.preventDefault();
 
     const subject = encodeURIComponent(`Portfolio contact from ${name}`);
-    const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
+    const body = encodeURIComponent(`${message}\n\n- ${name} (${email})`);
     window.location.href = `mailto:${siteConfig.email}?subject=${subject}&body=${body}`;
     setSent(true);
   }
@@ -72,8 +72,8 @@ export function ContactForm() {
 
       <p role="status" className="text-muted-foreground text-sm">
         {sent
-          ? "Opening your email client — if nothing happened, email me directly instead."
-          : "This opens your email client with the message prefilled — nothing is sent from this page."}
+          ? "Opening your email client. If nothing happens, just email me directly."
+          : "This opens your email client with the message prefilled. Nothing gets sent from this page."}
       </p>
     </form>
   );

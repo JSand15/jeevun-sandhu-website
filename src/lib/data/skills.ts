@@ -54,10 +54,10 @@ export const achievements = [
   {
     label: "7-project portfolio",
     detail:
-      "Built as a non-technical founder directing AI-assisted engineering.",
+      "Built by directing AI-assisted engineering, even though I don't code myself.",
   },
   {
     label: "Zero outside funding",
-    detail: "Every project bootstrapped — no investors, no loans.",
+    detail: "Every project bootstrapped. No investors, no loans.",
   },
 ] as const;

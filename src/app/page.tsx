@@ -244,8 +244,8 @@ export default function HomePage() {
               Building something worth building? Let&apos;s talk.
             </h2>
             <p className="text-muted-foreground mx-auto mt-4 max-w-lg text-balance">
-              Open to collaborations, internships, and conversations with
-              founders, engineers, and investors.
+              I&apos;m open to collaborations, internships, or just chatting
+              with founders, engineers, and investors.
             </p>
             <div className="mt-8 flex justify-center">
               <Button size="lg" render={<Link href="/contact" />}>

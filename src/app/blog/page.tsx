@@ -9,7 +9,7 @@ import { getAllPosts, getAllTags } from "@/lib/blog";
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    "Notes on building, shipping, and learning as a young AI-native founder.",
+    "My notes on building, shipping, and learning as a young AI-native founder.",
   alternates: { canonical: "/blog" },
 };
 
@@ -38,7 +38,7 @@ export default function BlogPage() {
       <div className="container-wide pb-24">
         {posts.length === 0 ? (
           <p className="text-muted-foreground">
-            Nothing published yet — first post is coming soon.
+            Nothing published yet. First post is coming soon.
           </p>
         ) : (
           <BlogList posts={posts} tags={tags} />

@@ -16,25 +16,25 @@ export interface Project {
 }
 
 // PLACEHOLDER: descriptions below are reasonable drafts based on the project
-// names alone — verify/replace the specifics (problem, challenges, lessons,
+// names alone, verify/replace the specifics (problem, challenges, lessons,
 // tech stack, status, links) with what's actually true for each project.
 export const projects: Project[] = [
   {
     slug: "finance-os",
     name: "Finance OS",
     tagline:
-      "A personal finance operating system for tracking spending, budgets, and net worth.",
+      "My personal finance dashboard for tracking spending, budgets, and net worth in one place.",
     description:
-      "Finance OS pulls spending, budgets, and net worth into one dashboard instead of a spreadsheet or five disconnected apps. The goal is a single place that tells you where your money actually goes.",
+      "Finance OS pulls my spending, budgets, and net worth into one dashboard instead of a spreadsheet or five different apps. I wanted one place that actually tells me where my money's going.",
     problem:
-      "Budgeting tools are either too simple to be useful (just categorized transactions) or too complex to keep up with (a spreadsheet that falls out of date after a week). I wanted one dashboard I'd actually open every day.",
+      "Budgeting apps are either too simple to be useful (just categorized transactions) or too complicated to keep up with (a spreadsheet that's outdated after a week). I wanted a dashboard I'd actually open every day.",
     challenges: [
-      "Designing a data model flexible enough for accounts, budgets, and categories without becoming its own maintenance burden.",
-      "Building a dashboard that surfaces what matters at a glance instead of dumping every number on screen.",
-      "Directing AI-assisted engineering to build the sync and calculation logic while I owned the product decisions.",
+      "Figuring out a data model flexible enough for accounts, budgets, and categories without it turning into a mess to maintain.",
+      "Building a dashboard that shows me what matters at a glance instead of dumping every number on the screen.",
+      "Directing AI-assisted engineering to build the sync and calculation logic while I handled the product decisions.",
     ],
     lessons: [
-      "A finance tool lives or dies on trust — accuracy matters more than any feature.",
+      "A finance tool lives or dies on trust. Accuracy matters more than any feature.",
       "The dashboard got better every time I cut something out, not added something in.",
     ],
     techStack: ["Next.js", "TypeScript", "Tailwind CSS"],
@@ -48,17 +48,17 @@ export const projects: Project[] = [
     tagline:
       "Turning raw financial data into plain-English lessons for people learning to invest.",
     description:
-      "FinLearn Analytics takes market and portfolio data and explains it in plain English instead of assuming the reader already knows what a Sharpe ratio is. It's built for people who want to actually understand investing, not just get a stock tip.",
+      "FinLearn Analytics takes market and portfolio data and explains it in plain English instead of assuming you already know what a Sharpe ratio is. I built it for people who actually want to understand investing, not just get a stock tip.",
     problem:
-      "Most financial literacy content is either too dumbed-down to be useful or assumes background knowledge a beginner doesn't have yet. I wanted to bridge raw data with actual understanding.",
+      "Most financial literacy content is either too dumbed-down to be useful or assumes you already know stuff a beginner doesn't. I wanted to bridge raw data with actual understanding.",
     challenges: [
-      "Translating analytics output into explanations that don't oversimplify or condescend.",
-      "Building a data pipeline that stays accurate as underlying data sources change.",
-      "Deciding what to leave out — a beginner-focused tool fails if it tries to show everything.",
+      "Turning analytics output into explanations that don't oversimplify or talk down to people.",
+      "Building a data pipeline that stays accurate as the underlying data sources change.",
+      "Figuring out what to leave out. A beginner-focused tool fails if it tries to show everything.",
     ],
     lessons: [
-      "Explaining a concept clearly is a forcing function for actually understanding it yourself.",
-      "One well-explained chart beats a dashboard of ten unexplained ones for a learning audience.",
+      "Explaining something clearly forces you to actually understand it yourself.",
+      "One well-explained chart beats a dashboard of ten unexplained ones if you're trying to teach someone.",
     ],
     techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Python"],
     status: "in-progress",
@@ -71,17 +71,17 @@ export const projects: Project[] = [
     tagline:
       "Building and submitting machine learning models to the Numerai data science tournament.",
     description:
-      "Numerai is a crowdsourced hedge fund that runs an ongoing tournament: data scientists submit models against obfuscated financial data, and the best-performing ones get capital behind them. I build and iterate models for it.",
+      "Numerai is a crowdsourced hedge fund that runs an ongoing tournament. Data scientists submit models against obfuscated financial data, and the best ones get real capital behind them. I build and tweak models for it.",
     problem:
-      "Most data science practice happens on clean, well-understood tutorial datasets. Numerai's data is deliberately obfuscated and adversarial, which is a much closer approximation of what modeling real markets actually feels like.",
+      "Most data science practice happens on clean, easy-to-understand tutorial datasets. Numerai's data is deliberately obfuscated and adversarial, which feels a lot closer to what modeling real markets is actually like.",
     challenges: [
-      "Working with anonymized features with no domain intuition to lean on — every decision has to be data-driven.",
-      "Avoiding overfitting to any single time period given the tournament's era-based scoring.",
-      "Directing AI tooling to help iterate on model pipelines while I owned the modeling strategy.",
+      "Working with anonymized features with zero domain intuition to lean on. Every decision has to be data-driven.",
+      "Avoiding overfitting to any single time period since the tournament scores across different eras.",
+      "Directing AI tools to help iterate on model pipelines while I owned the modeling strategy.",
     ],
     lessons: [
-      "Real market data is far noisier than anything in a textbook or tutorial.",
-      "Consistency across time periods matters more than a single high-scoring submission.",
+      "Real market data is way noisier than anything in a textbook or tutorial.",
+      "Staying consistent across time periods matters more than one lucky high-scoring submission.",
     ],
     techStack: ["Python", "Machine Learning", "Numerai API"],
     status: "in-progress",

@@ -9,7 +9,7 @@ import { Separator } from "@/components/ui/separator";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "How a 15-year-old in Los Angeles ended up directing AI-assisted engineering to build and ship real products.",
+    "I'm 15 and based in Los Angeles. Here's how I ended up directing AI-assisted engineering to build and ship real products.",
   alternates: { canonical: "/about" },
 };
 
@@ -17,29 +17,29 @@ const sections = [
   {
     title: "How I actually build",
     body: [
-      "I don't write every line of code myself. I direct AI engineering tools — Claude Code, mostly — to build production software, the same way a founder might direct a small engineering team. That's not a shortcut; it's a different skill: knowing what to build, why, and how to evaluate whether the output is actually good.",
-      "That distinction matters to me. I'm not pretending to be a senior engineer. I'm learning product thinking, system design, and judgment by shipping real things and seeing what breaks.",
+      "I don't write every line of code myself. I direct AI engineering tools, mostly Claude Code, to build real software, kind of like how a founder might direct a small engineering team. That's not a shortcut. It's a different skill. Knowing what to build, why, and being able to tell if the output is actually good.",
+      "That difference matters to me. I'm not pretending to be some senior engineer. I'm learning product thinking, system design, and judgment by actually shipping stuff and seeing what breaks.",
     ],
   },
   {
     title: "Why AI, specifically",
     body: [
-      "I got interested in AI because it collapsed the gap between having an idea and having a working product. A few years ago, a 15-year-old with no funding and no engineering team couldn't build real finance and data products alone. Now I can — and that changes what's possible for anyone willing to put in the work to direct it well.",
-      "I try to treat AI as the last 10% of a product, not the first. The core has to work — the workflow, the UX, the value — before any AI feature gets bolted on.",
+      "I got into AI because it closed the gap between having an idea and actually having a working product. A few years ago, a 15-year-old with no money and no team couldn't build real finance and data products alone. Now I can. That changes what's possible for anyone willing to put in the work to direct it the right way.",
+      "I try to treat AI as the last 10% of a product, not the first. The core has to actually work first, the workflow, the design, the value, before I bolt any AI feature onto it.",
     ],
   },
   {
     title: "The business side",
     body: [
-      "School doesn't teach you how to price something, talk to a customer, or decide what not to build. I'm learning all of that by doing it badly first — bootstrapped, no outside funding, no safety net beyond my own time.",
-      "My current goal is concrete: get a real, paying customer by mid-August 2026. Not a vague 'someday.' A specific target I'm building toward right now.",
+      "School doesn't teach you how to price something, talk to a customer, or decide what not to build. I'm learning all that by doing it badly first. Bootstrapped, no outside funding, no safety net besides my own time.",
+      "My current goal is simple: get a real, paying customer by mid-August 2026. Not some vague someday. An actual target I'm working toward right now.",
     ],
   },
   {
     title: "Curiosity and the long game",
     body: [
-      "I read a lot of founder stories, partly for the tactics and partly because I want to understand how people made decisions under uncertainty — because that's the part I'm living through right now.",
-      "I don't know yet which of my projects will become the real business. I'm treating that uncertainty as information, not a problem — building, testing, and letting the market tell me what's worth doubling down on.",
+      "I read a lot of founder stories, partly for the tactics and partly because I want to see how people made decisions when they had no idea what was going to happen. That's the part I'm living through right now.",
+      "I still don't know which of my projects is going to turn into the real business. I'm not treating that as a problem, it's just information. I keep building, testing, and letting the market tell me what's actually worth doubling down on.",
     ],
   },
 ];
@@ -50,7 +50,7 @@ export default function AboutPage() {
       <PageHeader
         eyebrow="About"
         title="I build things, then I figure out the rest."
-        description="I'm 15, based in Los Angeles, and I spend most of my non-school hours directing AI-assisted engineering to build real, working products."
+        description="I'm 15, I live in Los Angeles, and I spend most of my non-school hours directing AI-assisted engineering to build real, working products."
       />
 
       <div className="container-prose pb-24">
@@ -74,9 +74,9 @@ export default function AboutPage() {
 
         <FadeIn>
           <p className="text-foreground text-lg font-medium text-balance">
-            If you&apos;re building something, invested in someone who is, or
-            just want to compare notes on AI-native product development —
-            I&apos;d like to hear from you.
+            If you&apos;re building something, backing someone who is, or
+            just want to talk shop about building with AI, I&apos;d like to
+            hear from you.
           </p>
           <div className="mt-6">
             <Button render={<Link href="/contact" />}>Get in touch</Button>

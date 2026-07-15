@@ -8,7 +8,7 @@ import { projects } from "@/lib/data/projects";
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "Finance and AI projects built by directing AI-assisted engineering as a non-technical founder — from a personal finance dashboard to machine learning models for the Numerai tournament.",
+    "Finance and AI projects I built by directing AI-assisted engineering, even though I'm not a coder myself. Everything from a personal finance dashboard to machine learning models for the Numerai tournament.",
   alternates: { canonical: "/projects" },
 };
 
@@ -18,7 +18,7 @@ export default function ProjectsPage() {
       <PageHeader
         eyebrow="Projects"
         title="What I'm building"
-        description="Finance and AI, mostly. I scope these myself, direct the engineering, and iterate until they're actually good."
+        description="Finance and AI, mostly. I scope these myself, direct the engineering, and keep tweaking until they're actually good."
       />
 
       <div className="container-wide pb-24">
