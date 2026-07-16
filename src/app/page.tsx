@@ -1,5 +1,6 @@
 import { ArrowUpRight, Mail } from "lucide-react";
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 import { FadeIn } from "@/components/motion/fade-in";
@@ -27,8 +28,23 @@ export default function HomePage() {
       {/* Hero */}
       <section
         id="hero"
-        className="container-wide pt-20 pb-20 sm:pt-32 sm:pb-28"
+        className="container-wide relative overflow-hidden pt-20 pb-20 sm:pt-32 sm:pb-28"
       >
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-24 -right-24 -z-10 h-[420px] w-[420px] opacity-[0.06] select-none sm:h-[560px] sm:w-[560px]"
+          style={{
+            maskImage: "radial-gradient(circle, black, transparent 70%)",
+            WebkitMaskImage: "radial-gradient(circle, black, transparent 70%)",
+          }}
+        >
+          <Image
+            src="/projects/grid-texture.png"
+            alt=""
+            fill
+            className="object-cover"
+          />
+        </div>
         <FadeIn>
           <AvatarGlow />
         </FadeIn>
@@ -237,8 +253,18 @@ export default function HomePage() {
       </section>
 
       {/* CTA */}
-      <section id="cta" className="border-border/60 border-t">
-        <div className="container-wide py-20 text-center sm:py-28">
+      <section id="cta" className="border-border/60 relative overflow-hidden border-t">
+        <div className="absolute inset-0" aria-hidden="true">
+          <Image
+            src="/projects/cta-bg.jpg"
+            alt=""
+            fill
+            className="object-cover opacity-25"
+            sizes="100vw"
+          />
+          <div className="bg-background/88 absolute inset-0" />
+        </div>
+        <div className="container-wide relative py-20 text-center sm:py-28">
           <FadeIn>
             <h2 className="text-foreground mx-auto max-w-2xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
               Building something worth building? Let&apos;s talk.

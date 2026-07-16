@@ -40,7 +40,8 @@ export const projects: Project[] = [
     techStack: ["Next.js", "TypeScript", "Tailwind CSS"],
     status: "in-progress",
     featured: true,
-    // PLACEHOLDER: add github/demo links and a real screenshot once available.
+    image: "/projects/finance-os.jpg",
+    // PLACEHOLDER: add github/demo links once available.
   },
   {
     slug: "finlearn-analytics",
@@ -63,7 +64,8 @@ export const projects: Project[] = [
     techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Python"],
     status: "in-progress",
     featured: true,
-    // PLACEHOLDER: add github/demo links and a real screenshot once available.
+    image: "/projects/finlearn-analytics.jpg",
+    // PLACEHOLDER: add github/demo links once available.
   },
   {
     slug: "numerai",
@@ -86,6 +88,7 @@ export const projects: Project[] = [
     techStack: ["Python", "Machine Learning", "Numerai API"],
     status: "in-progress",
     featured: true,
+    image: "/projects/numerai.jpg",
     // PLACEHOLDER: confirm this framing (tournament participation, not the Numerai platform itself) is accurate, and add links if you want them public.
   },
 ];

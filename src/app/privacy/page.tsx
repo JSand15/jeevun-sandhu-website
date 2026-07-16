@@ -38,18 +38,19 @@ export default function PrivacyPage() {
           The contact form
         </h2>
         <p className="mt-3">
-          The contact form doesn&apos;t submit anything to a server or
-          database. It just opens your email client with a prefilled message
-          that you choose to send. Nothing you type gets stored unless you
-          actually send that email.
+          The contact form sends whatever you type straight to my inbox
+          through FormSubmit, a third-party email delivery service. I only
+          use it to receive your message. It&apos;s not used for tracking,
+          and nothing you send is shared or sold.
         </p>
 
         <h2 className="text-foreground mt-10 text-lg font-semibold">
           Third parties
         </h2>
         <p className="mt-3">
-          I don&apos;t sell or share your data with anyone. Links to my
-          GitHub, LinkedIn, and X are covered by those platforms&apos; own
+          I don&apos;t sell or share your data with anyone. FormSubmit
+          handles delivering contact form messages to my inbox, and links to
+          my GitHub, LinkedIn, and X are covered by those platforms&apos; own
           privacy policies once you click through.
         </p>
 

@@ -9,22 +9,57 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { siteConfig } from "@/lib/data/site";
 
-// Opens the visitor's email client with the message prefilled. No backend
-// required. Swap for a Resend/Formspree-style server action once available.
+// Submits straight to jeesand15@gmail.com via FormSubmit.co (no backend or
+// API key needed). First real submission triggers a one-time confirmation
+// email from FormSubmit that has to be clicked before delivery is live.
+const FORM_ENDPOINT = "https://formsubmit.co/ajax/jeesand15@gmail.com";
+
+type Status = "idle" | "sending" | "sent" | "error";
+
 export function ContactForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setStatus("sending");
 
-    const subject = encodeURIComponent(`Portfolio contact from ${name}`);
-    const body = encodeURIComponent(`${message}\n\n- ${name} (${email})`);
-    window.location.href = `mailto:${siteConfig.email}?subject=${subject}&body=${body}`;
-    setSent(true);
+    try {
+      const res = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          _subject: `Portfolio contact from ${name}`,
+          _template: "table",
+          _captcha: "false",
+        }),
+      });
+
+      if (!res.ok) throw new Error("Request failed");
+
+      setStatus("sent");
+      setName("");
+      setEmail("");
+      setMessage("");
+    } catch {
+      setStatus("error");
+    }
   }
+
+  const statusMessage: Record<Status, string> = {
+    idle: "This goes straight to my inbox. I'll get back to you as soon as I can.",
+    sending: "Sending…",
+    sent: `Sent. I'll get back to you soon. You can also reach me directly at ${siteConfig.email}.`,
+    error: `Something went wrong. Email me directly at ${siteConfig.email} and I'll get back to you.`,
+  };
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-5" noValidate>
@@ -65,15 +100,18 @@ export function ContactForm() {
         />
       </div>
 
-      <Button type="submit" size="lg" className="self-start">
-        Send message
+      <Button
+        type="submit"
+        size="lg"
+        className="self-start"
+        disabled={status === "sending"}
+      >
+        {status === "sending" ? "Sending…" : "Send message"}
         <Send className="size-4" aria-hidden="true" />
       </Button>
 
       <p role="status" className="text-muted-foreground text-sm">
-        {sent
-          ? "Opening your email client. If nothing happens, just email me directly."
-          : "This opens your email client with the message prefilled. Nothing gets sent from this page."}
+        {statusMessage[status]}
       </p>
     </form>
   );

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 import { FadeIn } from "@/components/motion/fade-in";
@@ -52,6 +53,21 @@ export default function AboutPage() {
         title="I build things, then I figure out the rest."
         description="I'm 15, I live in Los Angeles, and I spend most of my non-school hours directing AI-assisted engineering to build real, working products."
       />
+
+      <div className="container-wide pb-6">
+        <FadeIn>
+          <div className="border-border/60 bg-muted/40 relative mx-auto aspect-16/10 max-w-3xl overflow-hidden rounded-2xl border">
+            <Image
+              src="/projects/macbook.png"
+              alt="A MacBook, one of the tools I build with"
+              fill
+              className="object-contain p-10 sm:p-14"
+              sizes="(min-width: 1024px) 768px, 100vw"
+              priority
+            />
+          </div>
+        </FadeIn>
+      </div>
 
       <div className="container-prose pb-24">
         {sections.map((section, idx) => (
