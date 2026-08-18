@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "../styles/pixel.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -47,9 +48,19 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
   --color-brand: var(--brand);
+  --color-arcade: var(--arcade);
+  --color-arcade-foreground: var(--arcade-foreground);
+  --color-arcade-dim: var(--arcade-dim);
+  --color-arcade-cyan: var(--arcade-cyan);
+  --color-arcade-magenta: var(--arcade-magenta);
+  --color-arcade-green: var(--arcade-green);
+  --color-arcade-red: var(--arcade-red);
+  --color-lux: var(--lux);
+  --font-pixel: var(--font-press-start), ui-monospace, monospace;
+  --font-pixel-alt: var(--font-vt323), ui-monospace, monospace;
   --color-brand-foreground: var(--brand-foreground);
   --color-brand-muted: var(--brand-muted);
-  --font-display: var(--font-sans);
+  --font-display: var(--font-instrument-serif), Georgia, serif;
   --animate-fade-up: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   --animate-fade-in: fade-in 0.6s ease-out forwards;
 
@@ -109,6 +120,15 @@
   --brand: oklch(0.546 0.245 262.881);
   --brand-foreground: oklch(0.985 0 0);
   --brand-muted: oklch(0.932 0.032 255.585);
+  /* Luxury Arcade palette */
+  --arcade: oklch(0.62 0.14 78);
+  --arcade-foreground: oklch(0.99 0.01 90);
+  --arcade-dim: oklch(0.78 0.07 82);
+  --arcade-cyan: oklch(0.58 0.13 214);
+  --arcade-magenta: oklch(0.58 0.22 340);
+  --arcade-green: oklch(0.58 0.15 150);
+  --arcade-red: oklch(0.58 0.21 27);
+  --lux: oklch(0.28 0.01 90);
 }
 
 .dark {
@@ -146,6 +166,15 @@
   --brand: oklch(0.623 0.214 259.815);
   --brand-foreground: oklch(0.985 0 0);
   --brand-muted: oklch(0.282 0.091 267.935);
+  /* Luxury Arcade palette */
+  --arcade: oklch(0.85 0.16 87);
+  --arcade-foreground: oklch(0.16 0.02 90);
+  --arcade-dim: oklch(0.58 0.10 85);
+  --arcade-cyan: oklch(0.84 0.15 200);
+  --arcade-magenta: oklch(0.75 0.24 340);
+  --arcade-green: oklch(0.85 0.20 145);
+  --arcade-red: oklch(0.70 0.22 25);
+  --lux: oklch(0.97 0.01 90);
 }
 
 @layer base {
@@ -153,7 +182,17 @@
     @apply border-border outline-ring/50;
   }
   html {
-    @apply scroll-smooth font-sans antialiased;
+    @apply font-sans antialiased;
+  }
+  /* The JS scroll engine owns easing. Fall back to CSS smoothing only when
+     that engine is disabled (reduced motion, touch, no JS). */
+  html:not(.smooth-scroll-active) {
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html:not(.smooth-scroll-active) {
+      scroll-behavior: auto;
+    }
   }
   body {
     @apply bg-background text-foreground;

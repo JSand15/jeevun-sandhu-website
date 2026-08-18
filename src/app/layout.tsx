@@ -1,17 +1,47 @@
 import type { Metadata } from "next";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
+import { Instrument_Serif, Press_Start_2P, VT323 } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { MotionConfig } from "framer-motion";
 
 import "./globals.css";
 
+import {
+  AchievementToasts,
+  ArcadeHud,
+  ArcadeProvider,
+} from "@/components/arcade";
+import { ArcadeTracker } from "@/components/arcade/arcade-tracker";
+import { ScrollProgress, SmoothScrollProvider } from "@/components/scroll";
 import { Footer } from "@/components/site/footer";
 import { Navbar } from "@/components/site/navbar";
 import { ThemeProvider } from "@/components/site/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { siteConfig } from "@/lib/data/site";
+
+const pressStart = Press_Start_2P({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-press-start",
+  display: "swap",
+});
+
+const vt323 = VT323({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-vt323",
+  display: "swap",
+});
+
+const instrumentSerif = Instrument_Serif({
+  weight: "400",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  variable: "--font-instrument-serif",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -91,7 +121,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${GeistSans.variable} ${GeistMono.variable}`}
+      className={`${GeistSans.variable} ${GeistMono.variable} ${pressStart.variable} ${vt323.variable} ${instrumentSerif.variable}`}
       suppressHydrationWarning
     >
       <body className="flex min-h-svh flex-col font-sans">
@@ -106,17 +136,25 @@ export default function RootLayout({
         >
           <MotionConfig reducedMotion="user">
             <TooltipProvider delay={200}>
-              <a
-                href="#main-content"
-                className="bg-background text-foreground focus:ring-brand sr-only z-100 rounded-md border px-4 py-2 text-sm focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:ring-2"
-              >
-                Skip to content
-              </a>
-              <Navbar />
-              <main id="main-content" className="flex-1 pt-16">
-                {children}
-              </main>
-              <Footer />
+              <ArcadeProvider>
+                <SmoothScrollProvider>
+                  <a
+                    href="#main-content"
+                    className="bg-background text-foreground focus:ring-brand sr-only z-100 rounded-md border px-4 py-2 text-sm focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:ring-2"
+                  >
+                    Skip to content
+                  </a>
+                  <ScrollProgress />
+                  <Navbar />
+                  <main id="main-content" className="flex-1 pt-16">
+                    {children}
+                  </main>
+                  <Footer />
+                  <ArcadeTracker />
+                  <ArcadeHud />
+                  <AchievementToasts />
+                </SmoothScrollProvider>
+              </ArcadeProvider>
             </TooltipProvider>
           </MotionConfig>
         </ThemeProvider>

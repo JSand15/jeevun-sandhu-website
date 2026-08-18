@@ -1,0 +1,182 @@
+/* ---------------------------------------------------------------------------
+   8-bit utility layer.
+   Imported into globals.css so it runs through the Tailwind v4 pipeline and
+   can read the --arcade-* tokens defined there.
+
+   House rules for this layer:
+   - No border-radius. No blurred shadows (the one exception is the neon glow).
+   - Movement animates with steps() so it jumps in whole pixels, never eases.
+--------------------------------------------------------------------------- */
+
+@utility pixelated {
+  image-rendering: pixelated;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Stepped "notched corner" border, drawn with layered hard shadows so the
+   corners read as missing pixels rather than a rounded curve. */
+@utility pixel-border {
+  border-radius: 0;
+  box-shadow:
+    0 -2px 0 0 currentColor,
+    0 2px 0 0 currentColor,
+    -2px 0 0 0 currentColor,
+    2px 0 0 0 currentColor;
+}
+
+@utility pixel-shadow {
+  box-shadow: 4px 4px 0 0 var(--arcade);
+}
+
+@utility pixel-shadow-sm {
+  box-shadow: 2px 2px 0 0 var(--arcade);
+}
+
+/* CRT scanlines. Sits above content, never eats clicks. */
+@utility scanlines {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      color-mix(in oklab, black 34%, transparent) 0px,
+      color-mix(in oklab, black 34%, transparent) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    opacity: 0.35;
+    animation: scanline-drift 8s linear infinite;
+  }
+}
+
+@utility crt-vignette {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    background: radial-gradient(
+      ellipse at center,
+      transparent 55%,
+      color-mix(in oklab, black 55%, transparent) 100%
+    );
+  }
+}
+
+/* 4x4 Bayer dither. Makes gradients band like a 256-colour display. */
+@utility dither {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.22;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='4' shape-rendering='crispEdges'><rect width='1' height='1' x='0' y='0' fill='%23000'/><rect width='1' height='1' x='2' y='1' fill='%23000'/><rect width='1' height='1' x='1' y='2' fill='%23000'/><rect width='1' height='1' x='3' y='3' fill='%23000'/></svg>");
+    background-size: 4px 4px;
+  }
+}
+
+@utility text-pixel-shadow {
+  text-shadow: 2px 2px 0 var(--arcade-foreground);
+}
+
+@utility pixel-grid-bg {
+  background-image:
+    linear-gradient(
+      to right,
+      color-mix(in oklab, var(--border) 65%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--border) 65%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 32px 32px;
+}
+
+/* Neon halo. The only blur allowed in this layer. */
+@utility pixel-glow {
+  filter: drop-shadow(0 0 6px color-mix(in oklab, var(--arcade) 55%, transparent));
+}
+
+@utility pixel-blink {
+  animation: pixel-blink 1s steps(2, jump-none) infinite;
+}
+
+@utility pixel-bob {
+  animation: pixel-bob 0.9s steps(4, jump-none) infinite alternate;
+}
+
+@utility pixel-flicker {
+  animation: pixel-flicker 3.2s steps(1, end) infinite;
+}
+
+@keyframes pixel-blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes pixel-bob {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes scanline-drift {
+  from {
+    background-position-y: 0;
+  }
+  to {
+    background-position-y: 24px;
+  }
+}
+
+@keyframes pixel-flicker {
+  0%,
+  92%,
+  100% {
+    opacity: 1;
+  }
+  93% {
+    opacity: 0.72;
+  }
+  95% {
+    opacity: 1;
+  }
+  97% {
+    opacity: 0.85;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pixel-blink,
+  .pixel-bob,
+  .pixel-flicker {
+    animation: none;
+  }
+  .scanlines::after {
+    animation: none;
+  }
+}
