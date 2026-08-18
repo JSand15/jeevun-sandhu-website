@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 
 import { useArcade } from "./arcade-provider";
@@ -37,11 +38,21 @@ function computeMetrics(): ScrollMetrics | null {
  */
 export function useScrollXp() {
   const { hydrated, awardXp, unlock } = useArcade();
+  const pathname = usePathname();
 
   const maxDepthRef = useRef(0);
   const awardedBandsRef = useRef<Set<number>>(new Set());
   const bottomReachedRef = useRef(false);
   const tickingRef = useRef(false);
+
+  // This hook is mounted once at the layout level, so the depth refs would
+  // otherwise persist across client-side navigations and only ever pay out
+  // for the first page of a session.
+  useEffect(() => {
+    maxDepthRef.current = 0;
+    awardedBandsRef.current = new Set();
+    bottomReachedRef.current = false;
+  }, [pathname]);
 
   useEffect(() => {
     if (!hydrated) return;
@@ -87,5 +98,5 @@ export function useScrollXp() {
       window.removeEventListener("scroll", onScrollOrResize);
       window.removeEventListener("resize", onScrollOrResize);
     };
-  }, [hydrated, awardXp, unlock]);
+  }, [hydrated, awardXp, unlock, pathname]);
 }

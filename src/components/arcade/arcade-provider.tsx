@@ -232,6 +232,17 @@ export function ArcadeProvider({ children }: { children: ReactNode }) {
     if (!hydrated) return;
 
     function handleKeydown(event: KeyboardEvent) {
+      // Don't read the contact form's keystrokes into the cheat-code buffer.
+      const active = document.activeElement;
+      if (
+        active instanceof HTMLInputElement ||
+        active instanceof HTMLTextAreaElement ||
+        active instanceof HTMLSelectElement ||
+        (active instanceof HTMLElement && active.isContentEditable)
+      ) {
+        return;
+      }
+
       const key = event.key.toLowerCase();
       const buffer = [...bufferRef.current, key].slice(-KONAMI_SEQUENCE.length);
       bufferRef.current = buffer;

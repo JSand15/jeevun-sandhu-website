@@ -110,17 +110,26 @@ export function PixelImage({
     };
   }, [src, priority]);
 
-  // Repaint on load, on chunk change, and on resize.
+  // Repaint whenever the chunkiness changes.
   useEffect(() => {
     if (!loaded) return;
     paint(currentPixel);
+  }, [loaded, currentPixel, paint]);
 
+  // Observe size once. Keyed on currentPixel this would tear down and rebuild
+  // the observer on every 50ms step of the hover reveal, so read the latest
+  // value through a ref instead.
+  const pixelRef = useRef(currentPixel);
+  pixelRef.current = currentPixel;
+
+  useEffect(() => {
+    if (!loaded) return;
     const wrap = wrapRef.current;
     if (!wrap) return;
-    const ro = new ResizeObserver(() => paint(currentPixel));
+    const ro = new ResizeObserver(() => paint(pixelRef.current));
     ro.observe(wrap);
     return () => ro.disconnect();
-  }, [loaded, currentPixel, paint]);
+  }, [loaded, paint]);
 
   useEffect(() => {
     setCurrentPixel(pixelSize);

@@ -1,10 +1,10 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
-import type { Achievement } from "@/lib/arcade/types";
+import type { Achievement, AchievementId } from "@/lib/arcade/types";
 
 import { useArcade } from "./arcade-provider";
 import { getArcadeIcon } from "./icon-map";
@@ -33,14 +33,23 @@ function usePrefersReducedMotion() {
 interface ToastCardProps {
   achievement: Achievement;
   reducedMotion: boolean;
-  onDone: () => void;
+  onDismiss: (id: AchievementId) => void;
 }
 
-function ToastCard({ achievement, reducedMotion, onDone }: ToastCardProps) {
+function ToastCard({ achievement, reducedMotion, onDismiss }: ToastCardProps) {
+  // Hold the dismiss callback in a ref so the timer is keyed only on the
+  // achievement id. Passing an inline closure here would restart the countdown
+  // on every unrelated arcade state change (scroll XP, a second unlock), and a
+  // busy page could keep a toast on screen indefinitely.
+  const dismissRef = useRef(onDismiss);
+  dismissRef.current = onDismiss;
+
+  const id = achievement.id;
+
   useEffect(() => {
-    const timer = window.setTimeout(onDone, AUTO_DISMISS_MS);
+    const timer = window.setTimeout(() => dismissRef.current(id), AUTO_DISMISS_MS);
     return () => window.clearTimeout(timer);
-  }, [onDone]);
+  }, [id]);
 
   const Icon = getArcadeIcon(achievement.icon);
 
@@ -83,7 +92,7 @@ function ToastCard({ achievement, reducedMotion, onDone }: ToastCardProps) {
           </div>
           <button
             type="button"
-            onClick={onDone}
+            onClick={() => onDismiss(id)}
             aria-label={`Dismiss ${achievement.name} achievement notification`}
             className={cn(
               "ml-auto shrink-0 rounded-none border-2 border-transparent px-1 py-0.5",
@@ -114,7 +123,7 @@ export function AchievementToasts() {
             key={achievement.id}
             achievement={achievement}
             reducedMotion={reducedMotion}
-            onDone={() => dismissUnlock(achievement.id)}
+            onDismiss={dismissUnlock}
           />
         ))}
       </AnimatePresence>

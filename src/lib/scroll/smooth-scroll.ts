@@ -74,19 +74,40 @@ function hasScrollBlockerAttribute(el: Element): boolean {
   return el.closest('[data-no-smooth-scroll], [role="dialog"]') !== null;
 }
 
-/** Walks up from `el` looking for a real scrollable (overflow auto/scroll + has room) ancestor. */
+/**
+ * Walks up from `el` looking for a real scrollable ancestor — one whose
+ * overflow is auto/scroll on either axis AND that actually has room to move.
+ * Checking both axes matters: a horizontally scrollable code block would
+ * otherwise be hijacked and become unscrollable by trackpad swipe.
+ */
 function hasScrollableAncestor(el: Element): boolean {
   let node: Element | null = el;
   while (node && node !== document.body && node !== document.documentElement) {
     const style = window.getComputedStyle(node);
-    const overflowY = style.overflowY;
-    const isScrollableStyle = overflowY === "auto" || overflowY === "scroll";
-    if (isScrollableStyle && node.scrollHeight > node.clientHeight + 1) {
-      return true;
-    }
+
+    const scrollableY = style.overflowY === "auto" || style.overflowY === "scroll";
+    if (scrollableY && node.scrollHeight > node.clientHeight + 1) return true;
+
+    const scrollableX = style.overflowX === "auto" || style.overflowX === "scroll";
+    if (scrollableX && node.scrollWidth > node.clientWidth + 1) return true;
+
     node = node.parentElement;
   }
   return false;
+}
+
+/**
+ * True while something (a dialog, a sheet) has locked page scrolling. The
+ * engine must stand down entirely: the backdrop is a sibling of the dialog,
+ * not a descendant, so an attribute check on the event target alone misses it.
+ */
+function isScrollLocked(): boolean {
+  const html = document.documentElement;
+  if (html.hasAttribute("data-base-ui-scroll-locked")) return true;
+  return (
+    window.getComputedStyle(html).overflow === "hidden" ||
+    window.getComputedStyle(document.body).overflow === "hidden"
+  );
 }
 
 export class SmoothScroll {
@@ -193,9 +214,15 @@ export class SmoothScroll {
 
   private shouldHijack(event: WheelEvent): boolean {
     if (this.destroyed) return false;
+    // ctrl+wheel is how browsers deliver pinch-to-zoom. Never swallow it.
+    if (event.ctrlKey || event.metaKey) return false;
+    // A predominantly horizontal gesture belongs to the browser; we only
+    // drive the vertical axis.
+    if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) return false;
     if (prefersReducedMotion()) return false;
     if (isCoarsePointer()) return false;
     if (getMaxScroll() <= 0) return false;
+    if (isScrollLocked()) return false;
 
     const target = event.target;
     if (target instanceof Element) {
@@ -231,6 +258,14 @@ export class SmoothScroll {
   private handleScroll = (): void => {
     const realY = window.scrollY;
     if (Math.abs(realY - this.expectedY) < RESYNC_THRESHOLD) return;
+
+    // The scroll came from somewhere else (scrollbar drag, keyboard, anchor).
+    // Cancel any in-flight glide, otherwise the loop spends the next second
+    // yanking the page back toward its stale target every frame.
+    if (this.rafId !== null) {
+      cancelAnimationFrame(this.rafId);
+      this.rafId = null;
+    }
 
     this.current = realY;
     this.target = realY;
