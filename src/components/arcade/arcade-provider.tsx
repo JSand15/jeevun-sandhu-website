@@ -31,6 +31,8 @@ interface ArcadeContextValue {
   hasUnlocked: (id: AchievementId) => boolean;
   markVisited: (path: string) => void;
   visited: string[];
+  markGamePlayed: (gameId: string) => void;
+  gamesPlayed: string[];
   highScore: number;
   setHighScore: (n: number) => void;
   soundEnabled: boolean;
@@ -43,6 +45,9 @@ interface ArcadeContextValue {
 }
 
 const ArcadeContext = createContext<ArcadeContextValue | null>(null);
+
+/** Number of mini-games on the site; unlocks TYCOON when all are played. */
+const TOTAL_GAMES = 4;
 
 const KONAMI_SEQUENCE = [
   "arrowup",
@@ -163,6 +168,22 @@ export function ArcadeProvider({ children }: { children: ReactNode }) {
       unlockImplRef.current("explorer");
     } else if (nextVisited.length === 7) {
       unlockImplRef.current("completionist");
+    }
+  }, []);
+
+  // ---------- games played ----------
+  const markGamePlayed = useCallback((gameId: string) => {
+    if (!gameId) return;
+    const prev = stateRef.current;
+    if (prev.gamesPlayed.includes(gameId)) return;
+
+    const nextGames = [...prev.gamesPlayed, gameId];
+    const next: ArcadeState = { ...prev, gamesPlayed: nextGames };
+    stateRef.current = next;
+    setState(next);
+
+    if (nextGames.length >= TOTAL_GAMES) {
+      unlockImplRef.current("tycoon");
     }
   }, []);
 
@@ -292,6 +313,8 @@ export function ArcadeProvider({ children }: { children: ReactNode }) {
       hasUnlocked,
       markVisited,
       visited: state.visited,
+      markGamePlayed,
+      gamesPlayed: state.gamesPlayed,
       highScore: state.highScore,
       setHighScore,
       soundEnabled: state.soundEnabled,
@@ -307,6 +330,7 @@ export function ArcadeProvider({ children }: { children: ReactNode }) {
       state.xp,
       state.unlocked,
       state.visited,
+      state.gamesPlayed,
       state.highScore,
       state.soundEnabled,
       levelInfo,
@@ -315,6 +339,7 @@ export function ArcadeProvider({ children }: { children: ReactNode }) {
       unlock,
       hasUnlocked,
       markVisited,
+      markGamePlayed,
       setHighScore,
       toggleSound,
       play,

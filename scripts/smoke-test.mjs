@@ -12,8 +12,11 @@ const BASE = process.argv[2] ?? "http://localhost:3200";
 
 const ROUTES = [
   { path: "/", expect: ["Jeevun Sandhu", "SHIP IT", "PLAYER STATS", "QUEST LOG", "LEVEL SELECT"] },
-  { path: "/about", expect: ["Jeevun"] },
-  { path: "/projects", expect: ["Finance OS", "FinLearn Analytics", "Numerai"] },
+  { path: "/about", expect: ["Jeevun", "CASH FLOW", "Run my cash flow"] },
+  {
+    path: "/projects",
+    expect: ["Finance OS", "FinLearn Analytics", "Numerai", "BUG SQUASH", "Squash my bugs"],
+  },
   { path: "/projects/finance-os", expect: ["Finance OS"] },
   { path: "/projects/finlearn-analytics", expect: ["FinLearn Analytics"] },
   { path: "/projects/numerai", expect: ["Numerai"] },
@@ -21,8 +24,12 @@ const ROUTES = [
   { path: "/reading", expect: [] },
   { path: "/blog", expect: [] },
   { path: "/blog/why-i-build-with-ai", expect: [] },
-  { path: "/contact", expect: ["Get in touch", "Email"] },
+  {
+    path: "/contact",
+    expect: ["Get in touch", "Email", "CLOSE THE DEAL", "Close a deal with me"],
+  },
   { path: "/privacy", expect: ["Privacy"] },
+  { path: "/experience", expect: ["Experience"] },
   { path: "/blog/rss.xml", expect: ["<rss"], contentType: "xml" },
   { path: "/sitemap.xml", expect: ["<urlset"], contentType: "xml" },
   { path: "/robots.txt", expect: ["User-Agent"], contentType: "text", minLength: 20 },

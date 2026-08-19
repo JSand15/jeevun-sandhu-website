@@ -9,7 +9,8 @@ import { ArcadeCabinet } from "@/components/minigame";
 
 /** The playable section. Scores feed back into the site-wide XP system. */
 export function ArcadeSection() {
-  const { awardXp, unlock, setHighScore, highScore, play } = useArcade();
+  const { awardXp, unlock, setHighScore, highScore, markGamePlayed, play } =
+    useArcade();
   const lastMilestone = useRef(0);
 
   const handleScore = useCallback(
@@ -27,6 +28,7 @@ export function ArcadeSection() {
   const handleGameOver = useCallback(
     (score: number, isHighScore: boolean) => {
       lastMilestone.current = 0;
+      markGamePlayed("ship-it");
       if (score > highScore) setHighScore(score);
       if (isHighScore && score > 0) {
         unlock("high-scorer");
@@ -34,7 +36,7 @@ export function ArcadeSection() {
         play("error");
       }
     },
-    [highScore, setHighScore, unlock, play],
+    [highScore, setHighScore, unlock, markGamePlayed, play],
   );
 
   return (

@@ -2,6 +2,8 @@ import { Mail } from "lucide-react";
 import Link from "next/link";
 
 import { GithubIcon, LinkedinIcon, XIcon } from "@/components/icons";
+import { PixelDivider } from "@/components/pixel/pixel-divider";
+import { PixelSprite } from "@/components/pixel/pixel-sprite";
 import { navItems, siteConfig } from "@/lib/data/site";
 
 const socialLinks = [
@@ -66,15 +68,23 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="border-border/60 border-t">
+      <div className="container-wide">
+        <PixelDivider sprite="controller" />
+        <p className="font-pixel text-arcade mt-6 text-center text-[8px] leading-relaxed tracking-[0.18em]">
+          THANKS FOR PLAYING
+        </p>
+      </div>
+
+      <div className="border-border/60 mt-8 border-t">
         <div className="container-wide text-muted-foreground flex flex-col gap-2 py-6 text-xs sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
           </p>
           <Link
             href="/privacy"
-            className="hover:text-foreground transition-colors"
+            className="hover:text-arcade inline-flex items-center gap-1.5 transition-colors"
           >
+            <PixelSprite name="key" size={10} />
             Privacy
           </Link>
         </div>

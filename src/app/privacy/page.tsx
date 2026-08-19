@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <>
-      <PageHeader eyebrow="Legal" title="Privacy" />
+      <PageHeader eyebrow="Legal" title="Privacy" sprite="key" />
 
       <div className="container-prose text-muted-foreground pb-24 leading-relaxed">
         <p>

@@ -84,6 +84,13 @@ export const ACHIEVEMENTS: Achievement[] = [
     secret: true,
   },
   {
+    id: "tycoon",
+    name: "TYCOON",
+    description: "You played every game on this site. Go build something.",
+    icon: "chest",
+    xp: 150,
+  },
+  {
     id: "collector",
     name: "COLLECTOR",
     description: "Every achievement on this site, unlocked. You didn't have to go this hard.",

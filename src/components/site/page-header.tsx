@@ -1,12 +1,17 @@
 import type { ReactNode } from "react";
 
-import { FadeIn } from "@/components/motion/fade-in";
+import { PixelHeading } from "@/components/pixel/pixel-heading";
+import { PixelSprite, type PixelSpriteName } from "@/components/pixel/pixel-sprite";
+import { Reveal } from "@/components/scroll";
 
 interface PageHeaderProps {
   eyebrow?: string;
   title: string;
   description?: string;
   children?: ReactNode;
+  /** Optional 8-bit ornament shown beside the eyebrow. */
+  sprite?: PixelSpriteName;
+  accent?: "gold" | "cyan" | "magenta";
 }
 
 export function PageHeader({
@@ -14,16 +19,21 @@ export function PageHeader({
   title,
   description,
   children,
+  sprite,
+  accent = "gold",
 }: PageHeaderProps) {
   return (
     <div className="container-wide pt-16 pb-12 sm:pt-24 sm:pb-16">
-      <FadeIn>
+      <Reveal>
         {eyebrow && (
-          <p className="text-brand mb-3 text-sm font-medium tracking-wide uppercase">
-            {eyebrow}
-          </p>
+          <div className="mb-4 flex items-center gap-2.5">
+            {sprite && <PixelSprite name={sprite} size={18} />}
+            <PixelHeading as="p" accent={accent} className="text-[9px]">
+              {eyebrow}
+            </PixelHeading>
+          </div>
         )}
-        <h1 className="text-foreground text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
+        <h1 className="text-foreground font-display text-5xl tracking-tight text-balance sm:text-6xl">
           {title}
         </h1>
         {description && (
@@ -32,7 +42,7 @@ export function PageHeader({
           </p>
         )}
         {children}
-      </FadeIn>
+      </Reveal>
     </div>
   );
 }

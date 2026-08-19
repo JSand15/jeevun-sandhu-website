@@ -10,7 +10,8 @@ export type AchievementId =
   | "high-scorer"
   | "recruiter"
   | "speedrun"
-  | "collector";
+  | "collector"
+  | "tycoon";
 
 export type SfxName =
   | "blip"
@@ -37,4 +38,6 @@ export interface ArcadeState {
   visited: string[];
   highScore: number;
   konami: boolean;
+  /** Ids of the mini-games the visitor has actually played a round of. */
+  gamesPlayed: string[];
 }

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { GithubIcon, LinkedinIcon, XIcon } from "@/components/icons";
 import { FadeIn } from "@/components/motion/fade-in";
 import { ContactForm } from "@/components/site/contact-form";
+import { CloseDealSection } from "@/components/site/games/close-deal-section";
 import { PageHeader } from "@/components/site/page-header";
 import { siteConfig } from "@/lib/data/site";
 
@@ -45,6 +46,8 @@ export default function ContactPage() {
     <>
       <PageHeader
         eyebrow="Contact"
+        sprite="rocket"
+        accent="cyan"
         title="Let's talk"
         description="I'm open to collaborations, internships, or just chatting with founders, engineers, and investors."
       />
@@ -84,6 +87,7 @@ export default function ContactPage() {
           </ul>
         </FadeIn>
       </div>
+      <CloseDealSection />
     </>
   );
 }

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
+import { PixelSprite } from "@/components/pixel/pixel-sprite";
 import { ThemeToggle } from "@/components/site/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { navItems, siteConfig } from "@/lib/data/site";
@@ -23,10 +24,18 @@ export function Navbar() {
       >
         <Link
           href="/"
-          className="text-foreground font-medium tracking-tight"
+          className="text-foreground group flex items-center gap-2 font-medium tracking-tight"
           onClick={() => setOpen(false)}
         >
+          <PixelSprite
+            name="coin"
+            size={16}
+            className="transition-transform group-hover:-translate-y-0.5"
+          />
           {siteConfig.shortName}
+          <span aria-hidden className="text-arcade pixel-blink font-pixel text-[10px]">
+            ▮
+          </span>
         </Link>
 
         <ul className="hidden items-center gap-1 md:flex">

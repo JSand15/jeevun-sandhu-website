@@ -9,6 +9,7 @@ export const DEFAULT_STATE: ArcadeState = {
   visited: [],
   highScore: 0,
   konami: false,
+  gamesPlayed: [],
 };
 
 function isAchievementIdArray(value: unknown): value is AchievementId[] {
@@ -37,6 +38,9 @@ function sanitize(raw: unknown): ArcadeState {
         ? parsed.highScore
         : DEFAULT_STATE.highScore,
     konami: typeof parsed.konami === "boolean" ? parsed.konami : DEFAULT_STATE.konami,
+    gamesPlayed: isStringArray(parsed.gamesPlayed)
+      ? parsed.gamesPlayed
+      : DEFAULT_STATE.gamesPlayed,
   };
 }
 

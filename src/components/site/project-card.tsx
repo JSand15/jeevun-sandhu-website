@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { GithubIcon } from "@/components/icons";
+import { PixelBadge } from "@/components/pixel/pixel-badge";
 import { Badge } from "@/components/ui/badge";
 import { ProjectThumbnail } from "@/components/site/project-thumbnail";
 import type { Project } from "@/lib/data/projects";
@@ -11,6 +12,12 @@ const statusLabel: Record<Project["status"], string> = {
   live: "Live",
   "in-progress": "In progress",
   prototype: "Prototype",
+};
+
+const statusColor: Record<Project["status"], "green" | "gold" | "cyan"> = {
+  live: "green",
+  "in-progress": "gold",
+  prototype: "cyan",
 };
 
 export function ProjectCard({ project }: { project: Project }) {
@@ -47,9 +54,9 @@ export function ProjectCard({ project }: { project: Project }) {
               {project.tagline}
             </p>
           </div>
-          <Badge variant="secondary" className="shrink-0">
+          <PixelBadge color={statusColor[project.status]} className="shrink-0">
             {statusLabel[project.status]}
-          </Badge>
+          </PixelBadge>
         </div>
 
         <div className="flex flex-wrap gap-1.5">

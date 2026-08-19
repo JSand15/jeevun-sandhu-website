@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# compiled mini-game engines for headless tests
+.tmp-engines

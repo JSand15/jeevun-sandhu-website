@@ -21,6 +21,8 @@ export default function BlogPage() {
     <>
       <PageHeader
         eyebrow="Blog"
+        sprite="floppy"
+        accent="cyan"
         title="Writing"
         description="Notes on building, shipping, and learning as a young AI-native founder."
       >

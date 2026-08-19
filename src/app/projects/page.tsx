@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { StaggerGroup, StaggerItem } from "@/components/motion/stagger";
+import { BugSquashSection } from "@/components/site/games/bug-squash-section";
 import { PageHeader } from "@/components/site/page-header";
 import { ProjectCard } from "@/components/site/project-card";
 import { projects } from "@/lib/data/projects";
@@ -17,6 +18,8 @@ export default function ProjectsPage() {
     <>
       <PageHeader
         eyebrow="Projects"
+        sprite="controller"
+        accent="cyan"
         title="What I'm building"
         description="Finance and AI, mostly. I scope these myself, direct the engineering, and keep tweaking until they're actually good."
       />
@@ -30,6 +33,7 @@ export default function ProjectsPage() {
           ))}
         </StaggerGroup>
       </div>
+      <BugSquashSection />
     </>
   );
 }

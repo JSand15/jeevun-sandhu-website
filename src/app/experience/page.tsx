@@ -16,6 +16,7 @@ export default function ExperiencePage() {
     <>
       <PageHeader
         eyebrow="Experience"
+        sprite="sword"
         title="How I got here"
         description="School, first builds, shipped products, and what's next. In order."
       />

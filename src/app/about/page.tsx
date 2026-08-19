@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { FadeIn } from "@/components/motion/fade-in";
+import { CashFlowSection } from "@/components/site/games/cash-flow-section";
 import { PageHeader } from "@/components/site/page-header";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -50,6 +51,8 @@ export default function AboutPage() {
     <>
       <PageHeader
         eyebrow="About"
+        sprite="heart"
+        accent="magenta"
         title="I build things, then I figure out the rest."
         description="I'm 15, I live in Los Angeles, and I spend most of my non-school hours directing AI-assisted engineering to build real, working products."
       />
@@ -99,6 +102,7 @@ export default function AboutPage() {
           </div>
         </FadeIn>
       </div>
+      <CashFlowSection />
     </>
   );
 }

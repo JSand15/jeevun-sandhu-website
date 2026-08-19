@@ -41,6 +41,7 @@ export default function ReadingPage() {
     <>
       <PageHeader
         eyebrow="Reading"
+        sprite="chest"
         title="What I'm reading"
         description={readingNote}
       />
