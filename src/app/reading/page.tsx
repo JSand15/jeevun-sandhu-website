@@ -2,9 +2,16 @@ import type { Metadata } from "next";
 
 import { StaggerGroup, StaggerItem } from "@/components/motion/stagger";
 import { FadeIn } from "@/components/motion/fade-in";
+import { AmbientBackdrop } from "@/components/site/ambient-backdrop";
 import { PageHeader } from "@/components/site/page-header";
+import { luxuryImages } from "@/lib/data/luxury-images";
 import { Badge } from "@/components/ui/badge";
-import { alsoReadNote, books, readingNote, type Book } from "@/lib/data/reading";
+import {
+  alsoReadNote,
+  books,
+  readingNote,
+  type Book,
+} from "@/lib/data/reading";
 
 export const metadata: Metadata = {
   title: "Reading",
@@ -40,52 +47,57 @@ export default function ReadingPage() {
   return (
     <>
       <PageHeader
+        image={luxuryImages.watch}
+        scrim={55}
         eyebrow="Reading"
         sprite="chest"
         title="What I'm reading"
         description={readingNote}
       />
 
-      <div className="container-prose pb-24">
-        <FadeIn>
-          <h2 className="text-foreground text-sm font-medium tracking-wide uppercase">
-            Currently reading
-          </h2>
-        </FadeIn>
-        <StaggerGroup className="mt-2">
-          {books
-            .filter((b) => b.status === "reading")
-            .map((book) => (
-              <StaggerItem key={book.title}>
-                <BookRow book={book} />
-              </StaggerItem>
-            ))}
-        </StaggerGroup>
+      <section className="relative isolate">
+        <AmbientBackdrop />
+        <div className="container-prose pb-24">
+          <FadeIn>
+            <h2 className="text-foreground text-sm font-medium tracking-wide uppercase">
+              Currently reading
+            </h2>
+          </FadeIn>
+          <StaggerGroup className="mt-2">
+            {books
+              .filter((b) => b.status === "reading")
+              .map((book) => (
+                <StaggerItem key={book.title}>
+                  <BookRow book={book} />
+                </StaggerItem>
+              ))}
+          </StaggerGroup>
 
-        <FadeIn>
-          <h2 className="text-foreground mt-14 text-sm font-medium tracking-wide uppercase">
-            Favorites
-          </h2>
-        </FadeIn>
-        <StaggerGroup className="mt-2">
-          {books
-            .filter((b) => b.status === "favorite")
-            .map((book) => (
-              <StaggerItem key={book.title}>
-                <BookRow book={book} />
-              </StaggerItem>
-            ))}
-        </StaggerGroup>
+          <FadeIn>
+            <h2 className="text-foreground mt-14 text-sm font-medium tracking-wide uppercase">
+              Favorites
+            </h2>
+          </FadeIn>
+          <StaggerGroup className="mt-2">
+            {books
+              .filter((b) => b.status === "favorite")
+              .map((book) => (
+                <StaggerItem key={book.title}>
+                  <BookRow book={book} />
+                </StaggerItem>
+              ))}
+          </StaggerGroup>
 
-        <FadeIn>
-          <h2 className="text-foreground mt-14 text-sm font-medium tracking-wide uppercase">
-            Also read
-          </h2>
-          <p className="text-muted-foreground mt-4 max-w-2xl text-sm leading-relaxed">
-            {alsoReadNote}
-          </p>
-        </FadeIn>
-      </div>
+          <FadeIn>
+            <h2 className="text-foreground mt-14 text-sm font-medium tracking-wide uppercase">
+              Also read
+            </h2>
+            <p className="text-muted-foreground mt-4 max-w-2xl text-sm leading-relaxed">
+              {alsoReadNote}
+            </p>
+          </FadeIn>
+        </div>
+      </section>
     </>
   );
 }

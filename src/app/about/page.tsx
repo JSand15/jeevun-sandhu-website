@@ -4,7 +4,9 @@ import Link from "next/link";
 
 import { FadeIn } from "@/components/motion/fade-in";
 import { CashFlowSection } from "@/components/site/games/cash-flow-section";
+import { AmbientBackdrop } from "@/components/site/ambient-backdrop";
 import { PageHeader } from "@/components/site/page-header";
+import { luxuryImages } from "@/lib/data/luxury-images";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
@@ -50,6 +52,8 @@ export default function AboutPage() {
   return (
     <>
       <PageHeader
+        image={luxuryImages.manhattan}
+        scrim={48}
         eyebrow="About"
         sprite="heart"
         accent="magenta"
@@ -72,36 +76,39 @@ export default function AboutPage() {
         </FadeIn>
       </div>
 
-      <div className="container-prose pb-24">
-        {sections.map((section, idx) => (
-          <FadeIn key={section.title} as="section">
-            {idx !== 0 && <Separator className="my-10" />}
-            <h2 className="text-foreground text-xl font-semibold tracking-tight">
-              {section.title}
-            </h2>
-            <div className="mt-4 flex flex-col gap-4">
-              {section.body.map((p) => (
-                <p key={p} className="text-muted-foreground leading-relaxed">
-                  {p}
-                </p>
-              ))}
+      <section className="relative isolate">
+        <AmbientBackdrop />
+        <div className="container-prose pb-24">
+          {sections.map((section, idx) => (
+            <FadeIn key={section.title} as="section">
+              {idx !== 0 && <Separator className="my-10" />}
+              <h2 className="text-foreground text-xl font-semibold tracking-tight">
+                {section.title}
+              </h2>
+              <div className="mt-4 flex flex-col gap-4">
+                {section.body.map((p) => (
+                  <p key={p} className="text-muted-foreground leading-relaxed">
+                    {p}
+                  </p>
+                ))}
+              </div>
+            </FadeIn>
+          ))}
+
+          <Separator className="my-10" />
+
+          <FadeIn>
+            <p className="text-foreground text-lg font-medium text-balance">
+              If you&apos;re building something, backing someone who is, or just
+              want to talk shop about building with AI, I&apos;d like to hear
+              from you.
+            </p>
+            <div className="mt-6">
+              <Button render={<Link href="/contact" />}>Get in touch</Button>
             </div>
           </FadeIn>
-        ))}
-
-        <Separator className="my-10" />
-
-        <FadeIn>
-          <p className="text-foreground text-lg font-medium text-balance">
-            If you&apos;re building something, backing someone who is, or
-            just want to talk shop about building with AI, I&apos;d like to
-            hear from you.
-          </p>
-          <div className="mt-6">
-            <Button render={<Link href="/contact" />}>Get in touch</Button>
-          </div>
-        </FadeIn>
-      </div>
+        </div>
+      </section>
       <CashFlowSection />
     </>
   );

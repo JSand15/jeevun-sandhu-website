@@ -9,6 +9,7 @@ import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 
 import { FadeIn } from "@/components/motion/fade-in";
+import { AmbientBackdrop } from "@/components/site/ambient-backdrop";
 import { mdxComponents } from "@/components/site/mdx-components";
 import { Badge } from "@/components/ui/badge";
 import { getAllPosts, getPostBySlug } from "@/lib/blog";
@@ -59,67 +60,70 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   };
 
   return (
-    <article className="container-prose py-16 sm:py-24">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
-      />
-
-      <FadeIn>
-        <Link
-          href="/blog"
-          className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 text-sm"
-        >
-          <ArrowLeft className="size-3.5" aria-hidden="true" />
-          All posts
-        </Link>
-
-        <h1 className="text-foreground mt-6 text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
-          {post.title}
-        </h1>
-
-        <div className="text-muted-foreground mt-4 flex flex-wrap items-center gap-3 text-sm">
-          <time dateTime={post.date}>
-            {new Date(post.date).toLocaleDateString("en-US", {
-              month: "long",
-              day: "numeric",
-              year: "numeric",
-            })}
-          </time>
-          <span aria-hidden="true">·</span>
-          <span>{post.readingTime}</span>
-        </div>
-
-        {post.tags?.length > 0 && (
-          <div className="mt-4 flex flex-wrap gap-1.5">
-            {post.tags.map((tag) => (
-              <Badge key={tag} variant="outline" className="font-normal">
-                {tag}
-              </Badge>
-            ))}
-          </div>
-        )}
-      </FadeIn>
-
-      <FadeIn delay={0.05} className="prose-content mt-4">
-        <MDXRemote
-          source={post.content}
-          components={mdxComponents}
-          options={{
-            mdxOptions: {
-              remarkPlugins: [remarkGfm],
-              rehypePlugins: [
-                rehypeSlug,
-                [rehypeAutolinkHeadings, { behavior: "wrap" }],
-                [
-                  rehypePrettyCode,
-                  { theme: "github-dark", keepBackground: true },
-                ],
-              ],
-            },
-          }}
+    <div className="relative isolate">
+      <AmbientBackdrop dither />
+      <article className="container-prose py-16 sm:py-24">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
         />
-      </FadeIn>
-    </article>
+
+        <FadeIn>
+          <Link
+            href="/blog"
+            className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 text-sm"
+          >
+            <ArrowLeft className="size-3.5" aria-hidden="true" />
+            All posts
+          </Link>
+
+          <h1 className="text-foreground font-display mt-6 text-5xl tracking-tight text-balance sm:text-6xl">
+            {post.title}
+          </h1>
+
+          <div className="text-muted-foreground mt-4 flex flex-wrap items-center gap-3 text-sm">
+            <time dateTime={post.date}>
+              {new Date(post.date).toLocaleDateString("en-US", {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              })}
+            </time>
+            <span aria-hidden="true">·</span>
+            <span>{post.readingTime}</span>
+          </div>
+
+          {post.tags?.length > 0 && (
+            <div className="mt-4 flex flex-wrap gap-1.5">
+              {post.tags.map((tag) => (
+                <Badge key={tag} variant="outline" className="font-normal">
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+          )}
+        </FadeIn>
+
+        <FadeIn delay={0.05} className="prose-content mt-4">
+          <MDXRemote
+            source={post.content}
+            components={mdxComponents}
+            options={{
+              mdxOptions: {
+                remarkPlugins: [remarkGfm],
+                rehypePlugins: [
+                  rehypeSlug,
+                  [rehypeAutolinkHeadings, { behavior: "wrap" }],
+                  [
+                    rehypePrettyCode,
+                    { theme: "github-dark", keepBackground: true },
+                  ],
+                ],
+              },
+            }}
+          />
+        </FadeIn>
+      </article>
+    </div>
   );
 }

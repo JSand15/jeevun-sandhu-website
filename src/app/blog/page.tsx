@@ -3,7 +3,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { BlogList } from "@/components/site/blog-list";
+import { AmbientBackdrop } from "@/components/site/ambient-backdrop";
 import { PageHeader } from "@/components/site/page-header";
+import { luxuryImages } from "@/lib/data/luxury-images";
 import { getAllPosts, getAllTags } from "@/lib/blog";
 
 export const metadata: Metadata = {
@@ -20,6 +22,8 @@ export default function BlogPage() {
   return (
     <>
       <PageHeader
+        image={luxuryImages.texture}
+        scrim={62}
         eyebrow="Blog"
         sprite="floppy"
         accent="cyan"
@@ -37,15 +41,18 @@ export default function BlogPage() {
         </div>
       </PageHeader>
 
-      <div className="container-wide pb-24">
-        {posts.length === 0 ? (
-          <p className="text-muted-foreground">
-            Nothing published yet. First post is coming soon.
-          </p>
-        ) : (
-          <BlogList posts={posts} tags={tags} />
-        )}
-      </div>
+      <section className="relative isolate">
+        <AmbientBackdrop />
+        <div className="container-wide pb-24">
+          {posts.length === 0 ? (
+            <p className="text-muted-foreground">
+              Nothing published yet. First post is coming soon.
+            </p>
+          ) : (
+            <BlogList posts={posts} tags={tags} />
+          )}
+        </div>
+      </section>
     </>
   );
 }
